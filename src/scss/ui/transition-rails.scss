@@ -1,0 +1,23 @@
+.transition-rails {
+  width: 100%;
+  overflow: hidden;
+  margin-top: size(200, 100);
+}
+
+.transition-rails__items {
+  display: flex;
+  justify-content: space-between;
+  width: fit-content;
+}
+
+.transition-rails__item {
+  font-size: size(238, 58);
+  white-space: nowrap;
+  // color: $black;
+  line-height: 1.15em;
+}
+
+.dark-section__transition-rails {
+  position: absolute;
+  top: -160px;
+}

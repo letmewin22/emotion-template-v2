@@ -1,0 +1,52 @@
+h1 {
+  font-size: 36px;
+}
+
+.h2 {
+  font-size: size(100, 40);
+  @include reg;
+  line-height: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.h2__line {
+  width: 100%;
+  height: 1px;
+  background: $accent;
+}
+
+.h2__line--before {
+  margin-bottom: 72px;
+}
+
+.h2__line--after {
+  margin-top: 72px;
+}
+
+.section__text {
+  font-size: size(28, 16);
+  line-height: 1.5em;
+}
+
+.section__text + .section__text {
+  margin-top: size(32, 24);
+}
+
+.h3 {
+  font-size: size(48, 24);
+  @include medium;
+  line-height: 1em;
+}
+
+.section__bold-text {
+  @include medium;
+  font-size: size(24, 16);
+  width: size(394, 335);
+}
+
+.h4 {
+  @include medium;
+  font-size: size(30, 24);
+}

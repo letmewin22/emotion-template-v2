@@ -1,0 +1,26 @@
+.cnt-btn {
+  position: fixed;
+  right: size(60, 20);
+  bottom: 3%;
+  z-index: 100;
+  border-radius: 50%;
+  cursor: pointer;
+  &:hover {
+    .cnt-btn__content {
+      transform: scale(1.03);
+    }
+    .cnt-btn__circle {
+      transform: scale(0.9);   
+    }
+  }
+}
+
+.cnt-btn__content {
+  transition: transform .45s cubic-bezier(.17,.67,.3,1.33);
+  transform-origin: center;
+}
+
+.cnt-btn__circle {
+  transform-origin: center;
+  transition: transform .45s cubic-bezier(.17,.67,.3,1.33);
+}

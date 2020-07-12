@@ -1,0 +1,21 @@
+.js-lines-added {
+  position: relative;
+}
+
+.js-lines {
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+}
+
+.js-lines__js-line {
+  width: 0;
+  height: 1px;
+  background: $accent;
+  position: absolute;
+}
+
+.js-lines__js-line--second {
+  margin-top: 5px;
+}
