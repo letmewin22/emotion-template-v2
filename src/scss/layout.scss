@@ -4,24 +4,3 @@
   width: 100%;
   position: relative;
 }
-
-
-
-.container__cols {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 72px;
-}
-
-.container__l-col {
-  width: 41.5%
-}
-
-.container__r-col {
-  width: 58.5%
-}
-
-.section__container {
-  padding-top: size(200, 100);
-}

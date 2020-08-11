@@ -19,6 +19,7 @@ const config = {
     js: projectFolder + '/js/',
     img: projectFolder + '/img/',
     video: projectFolder + '/video/',
+    audio: projectFolder + '/audio/',
     fonts: projectFolder + '/fonts/',
   },
   src: {
@@ -29,6 +30,7 @@ const config = {
     js: sourceFolder + '/js/app.js',
     img: sourceFolder + '/img/**/*.{jpg,png,svg,gif,ico,webp}',
     video: sourceFolder + '/video/*',
+    audio: sourceFolder + '/audio/*',
     fonts: sourceFolder + '/fonts/*.ttf',
   },
   watch: {
@@ -36,7 +38,8 @@ const config = {
     css: sourceFolder + '/scss/**/*.{scss,sass}',
     js: sourceFolder + '/js/**/*.js',
     img: sourceFolder + '/img/**/*.{jpg,png,svg,gif,ico,webp}',
-    video: sourceFolder + '/video/*'
+    video: sourceFolder + '/video/*',
+    audio: sourceFolder + '/audio/*'
   },
   clean: './' + projectFolder + '/',
   cleanJS: projectFolder + '/js/app.*',

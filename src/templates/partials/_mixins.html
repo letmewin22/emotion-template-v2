@@ -5,14 +5,3 @@
     <div class="h2__line h2__line--after"></div>
   </div>
 {% endmacro %}
-
-{% macro btn(text) %}
-  <button class="btn">
-    <div class="btn__text-wrapper">
-      {% for i in range(0, 4) -%}
-        <span class="btn__text">{{text}}</span>
-      {% endfor %}
-    </div>
-    <div class="btn__overlay"></div>
-  </button>
-{% endmacro %}
