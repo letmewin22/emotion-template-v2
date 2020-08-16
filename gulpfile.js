@@ -19,7 +19,6 @@ const otfConvert = require('./gulp/tasks/otfConvert')
 const fontsInclude = require('./gulp/tasks/fontsInclude')
 
 
-
 function wpBuild(done) {
   config.setEnv('production')
   config.logEnv()
@@ -44,7 +43,6 @@ function watchFiles() {
   gulp.watch([config.watch.img], images)
   gulp.watch([config.watch.video], video)
   gulp.watch([config.watch.audio], audio)
-  
 }
 
 function clean() {
@@ -56,10 +54,27 @@ function cleanPHP() {
 }
 
 
-const build = gulp.series(clean, wpBuild, gulp.parallel(js, css, html, images, fonts, video, audio))
-const tophp = gulp.series(cleanPHP, wpBuild, gulp.parallel(php, js, css))
-const dev = gulp.series(clean, gulp.parallel(js, css, html, images, fonts, video, audio))
-const watch = gulp.series(wpDev, gulp.parallel(dev, watchFiles, server))
+const build = gulp.series(
+  clean,
+  wpBuild,
+  gulp.parallel(js, css, html, images, fonts, video, audio)
+)
+
+const tophp = gulp.series(
+  cleanPHP,
+  wpBuild,
+  gulp.parallel(php, js, css)
+)
+
+const dev = gulp.series(
+  clean,
+  gulp.parallel(js, css, html, images, fonts, video, audio)
+)
+
+const watch = gulp.series(
+  wpDev,
+  gulp.parallel(dev, watchFiles, server)
+)
 
 
 exports.fonts = fonts

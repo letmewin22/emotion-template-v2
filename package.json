@@ -6,21 +6,15 @@
   "scripts": {
     "build": "gulp build --production",
     "start": "gulp",
-    "ghpages": "git subtree push --prefix build origin gh-pages",
     "precommit": "lint-staged",
-    "lint": "eslint --ignore-pattern 'src/js/lib/' --cache --format=node_modules/eslint-formatter-pretty src/js/",
+    "lint": "eslint --ignore-pattern 'src/js/libs/' --cache --format=node_modules/eslint-formatter-pretty src/js/",
     "lint-fix": "npm run lint -- --fix"
-  },
-  "lint-staged": {
-    "src/templates/**/*.html": [
-      "htmlhint --config .htmlhintrc"
-    ]
   },
   "authors": "emotion <hello@emotion-agency.com>",
   "license": "ISC",
   "browserslist": [
-    "> 1%",
-    "last 5 versions"
+    "> 0.25%",
+    "not dead"
   ],
   "devDependencies": {
     "@babel/core": "^7.10.2",
@@ -34,6 +28,7 @@
     "browser-sync": "^2.26.7",
     "del": "^5.1.0",
     "eslint": "^7.1.0",
+    "eslint-config-google": "^0.14.0",
     "eslint-formatter-pretty": "^3.0.1",
     "eslint-loader": "^4.0.2",
     "gulp": "^4.0.2",

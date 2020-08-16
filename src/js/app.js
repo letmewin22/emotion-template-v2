@@ -16,3 +16,17 @@ cssWebP()
 //     default: OtherTransition
 //   }
 // })
+
+class Test {
+  static variable = 'test'
+
+  constructor() {
+    this.init()
+  }
+
+  init() {
+    console.log('is innited')
+  }
+}
+
+console.log(Test.variable)

@@ -4,8 +4,8 @@ import MouseParallax from '@/MouseParallax'
 import Links from '@/Links'
 // import scrollScale from '@/scrollScale'
 
-
 class Home extends Highway.Renderer {
+
   onEnterCompleted() {
 
     new ParallaxScroller('.main-header__scroller')
@@ -16,9 +16,7 @@ class Home extends Highway.Renderer {
     })
 
     new Links(document.querySelectorAll('.navbar__list-item'))
-
     // scrollScale()
-
   }
 }
 // Don`t forget to export your renderer

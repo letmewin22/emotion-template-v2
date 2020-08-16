@@ -25,8 +25,10 @@ function html(bs) {
       path: [config.src.templates]
     }))
     .pipe(gulpif(config.production, webphtml()))
-    .pipe(inject.replace('app.js', 'app.' + config.hash + '.js'))
-    .pipe(inject.replace('app.css', 'app.' + config.hash + '.css'))
+    // @ts-ignore
+    .pipe(gulpif(config.production, inject.replace('app.js', 'app.' + config.hash + '.js')))
+    // @ts-ignore
+    .pipe(gulpif(config.production, inject.replace('app.css', 'app.' + config.hash + '.css')))
     .pipe(prettify({
       indentSize: 2,
       wrapAttributes: 'auto', // 'force'
