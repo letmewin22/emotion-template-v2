@@ -1,7 +1,7 @@
 const webpackReal = require('webpack')
 const path = require('path')
-const BundleAnalyzerPlugin =
-require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin =
+// require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 
 function createConfig(env) {

@@ -1,6 +1,6 @@
 {
   "name": "emotion-template",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "Base emotion agency template",
   "main": "index.html",
   "scripts": {
