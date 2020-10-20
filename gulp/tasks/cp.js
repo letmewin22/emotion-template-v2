@@ -1,17 +1,14 @@
-
 const yargs = require('yargs')
 const fs = require('fs')
 const foldersName = require('../foldersName')
 
 function cp(cb) {
-  const options = yargs
-    .usage('Page name: -n <name>')
-    .option('n', {
-      alias: 'name',
-      describe: 'Page name',
-      type: 'string',
-      demandOption: true
-    }).argv
+  const options = yargs.usage('Page name: -n <name>').option('n', {
+    alias: 'name',
+    describe: 'Page name',
+    type: 'string',
+    demandOption: true,
+  }).argv
 
   console.log(`Creating, ${options.name} page...`)
 
@@ -27,13 +24,40 @@ function cp(cb) {
   const scssContent = fs.readFileSync(scssPages, 'utf8')
   const jsPages = `${foldersName.sourceFolder}/js/core/renderers/index.js`
   const jsContent = fs.readFileSync(jsPages, 'utf8')
+  const appjs = `${foldersName.sourceFolder}/js/app.js`
+
+  const appjsContent = fs.readFileSync(appjs, 'utf8')
+
+  const regex = /renderers:\s{+/gm
+  const regex2 = /(import {Home).{1,}/gm
+
+  let m
+  let toReplaceString
+
+  while ((m = regex2.exec(appjsContent)) !== null) {
+    // This is necessary to avoid infinite loops with zero-width matches
+    if (m.index === regex2.lastIndex) {
+      regex2.lastIndex++
+    }
+
+    // The result can be accessed through the `m`-variable.
+    toReplaceString = m[0].replace(/}/gm, `, ${capName}}`)
+  }
+
+  const appJSOutput = appjsContent.replace(
+    regex,
+    `renderers: {
+    ${name}: ${capName},`,
+  ).replace(regex2, toReplaceString)
 
   fs.writeFile(scssPages, `${scssContent}\r\n@import '${name}';`, cb)
   fs.writeFile(
     jsPages,
     `${jsContent} export {default as ${capName}} from './${capName}'`,
-    cb
+    cb,
   )
+  fs.writeFile(appjs, appJSOutput, cb)
+
 
   const template1 = `{% set title = "${name}" %}
 {% set route = "${name}" %}
