@@ -7,6 +7,7 @@ Clone this repo and then in command line type:
 * `gulp build` - build project from sources
 * `gulp clean` - clean build folder
 * `gulp tophp` - build project to folder with wordpress
+* `gulp cp -n [pagename]` - create page template(html, css, js)
 
 --
 
