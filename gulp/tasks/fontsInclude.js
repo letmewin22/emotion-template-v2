@@ -1,3 +1,4 @@
+/*eslint-disable*/
 const fs = require('fs')
 const config = require('../config')
 const foldersName = require('../foldersName')
@@ -13,11 +14,11 @@ function fontsStyle(cb) {
     if (items) {
       let cFontname
       for (let i = 0; i < items.length; i++) {
-        let fontname = items[i].split('.')
-        fontname = fontname[0]
+        let fontname = items[i].split('.')[0]
+        // fontname = fontname[0]
         if (cFontname !== fontname) {
           fs.appendFile(path, '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n', cb)
-          fs.appendFile(path2, `<link rel="preload" href="./fonts/${fontname}.woff" type="font/woff" as="font" crossorigin="anonymous">\r\n`, cb)
+          fs.appendFile(path2, `<link rel="preload" href="./fonts/${fontname}.woff2" type="font/woff" as="font" crossorigin="anonymous">\r\n`, cb)
         }
         cFontname = fontname
       }

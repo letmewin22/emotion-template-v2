@@ -60,6 +60,9 @@ function createConfig(env) {
       minimize: isProduction
     },
     plugins: [
+      new webpackReal.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }),
       new webpackReal.LoaderOptionsPlugin({
         options: {
           eslint: {
