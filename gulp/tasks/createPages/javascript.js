@@ -10,8 +10,9 @@ function javascript(name, capName, cb) {
   const appjs = `${foldersName.sourceFolder}/js/app.js`
   const appjsContent = fs.readFileSync(appjs, 'utf8')
 
-  const regex = /renderers:\s{+/gm
+  const regex = /renderers: {(\s.{1,}){1,}},/gm
   const regex2 = /(import {Home).{1,}/gm
+  const regex3 = /\s.{1,}},/gm
 
   let m
   let toReplaceString
@@ -26,11 +27,14 @@ function javascript(name, capName, cb) {
     toReplaceString = m[0].replace(/}/gm, `, ${capName}}`)
   }
 
-  const appJSOutput = appjsContent.replace(
-    regex,
-    `renderers: {
-    ${name}: ${capName},`,
-  ).replace(regex2, toReplaceString)
+  const matched = appjsContent.match(regex)[0]
+  .replace(regex3, `,
+    ${name}: ${capName}
+  },`)
+
+  const replaceMatch = appjsContent.replace(regex, matched)
+
+  const appJSOutput = replaceMatch.replace(regex2, toReplaceString)
 
   fs.writeFile(
     jsPages,
