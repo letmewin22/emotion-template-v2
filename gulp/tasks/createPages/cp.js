@@ -4,7 +4,7 @@ const css = require('./css')
 const javascript = require('./javascript')
 
 function cp(cb) {
-  
+
   const options = yargs.usage('Page name: -n <name>').option('n', {
     alias: 'name',
     describe: 'Page name',
@@ -26,7 +26,7 @@ function cp(cb) {
   if (!yargs.argv.nojs) {
     const jsPath = javascript(name, capName, cb)
     path.push(jsPath)
-  } 
+  }
 
   console.log(path.join(' '))
 

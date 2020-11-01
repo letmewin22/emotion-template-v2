@@ -10,7 +10,7 @@ function svgSprites() {
       .pipe(svgSprite({
         mode: {
           stack: {
-            sprite: '../icons/icons.svg', //sprite file name
+            sprite: '../icons/icons.svg', // sprite file name
             example: true
           }
         },

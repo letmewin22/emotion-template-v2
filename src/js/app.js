@@ -5,7 +5,7 @@ import moveEl from './libs/moveEl'
 
 import Highway from '@dogstudio/highway'
 
-import {Home} from './core/renderers'
+import {Home, About} from './core/renderers'
 import {Basic} from './core/transitions'
 import Hooks from './core/Hooks'
 import {setState, state} from './state'
@@ -19,7 +19,8 @@ process.env.NODE_ENV === 'production' && cssWebP()
 
 const H = new Highway.Core({
   renderers: {
-    home: Home
+    home: Home,
+    about: About
   },
   transitions: {
     default: Basic

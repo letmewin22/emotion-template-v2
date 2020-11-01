@@ -9,7 +9,7 @@ function css(name, cb) {
 
   fs.writeFile(scssPages, `${scssContent}\r\n@import '${name}';`, cb)
   fs.appendFile(path, '', cb)
-  
+
   return path
 }
 

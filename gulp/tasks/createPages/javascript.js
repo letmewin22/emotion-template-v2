@@ -28,7 +28,7 @@ function javascript(name, capName, cb) {
   }
 
   const matched = appjsContent.match(regex)[0]
-  .replace(regex3, `,
+    .replace(regex3, `,
     ${name}: ${capName}
   },`)
 

@@ -7,7 +7,7 @@ const sourceFolder = foldersName.sourceFolder
 const production = util.env.production || util.env.prod || false
 
 const config = {
-  
+
   env: 'development',
   production: production,
   templates: sourceFolder + '/templates',
@@ -64,4 +64,4 @@ const config = {
 
 config.setEnv(production ? 'production' : 'development')
 
-module.exports = config 
+module.exports = config

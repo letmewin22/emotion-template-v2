@@ -1,4 +1,5 @@
-const webpackReal = require('webpack')
+const ESLintPlugin = require('eslint-webpack-plugin')
+const webpack = require('webpack')
 const path = require('path')
 // const BundleAnalyzerPlugin =
 // require('webpack-bundle-analyzer').BundleAnalyzerPlugin
@@ -27,17 +28,6 @@ function createConfig(env) {
     module: {
       rules: [
         {
-          enforce: 'pre',
-          test: /\.js$/,
-          exclude: '/node_modules/',
-          loader: 'eslint-loader',
-          options: {
-            fix: true,
-            cache: true,
-            ignorePattern: __dirname + '/src/js/lib/'
-          }
-        },
-        {
           test: /\.js$/,
           loader: 'babel-loader',
           exclude: '/node_modules/',
@@ -57,38 +47,36 @@ function createConfig(env) {
       'eval-cheap-module-source-map' :
       false,
     optimization: {
-      minimize: isProduction
+      minimize: isProduction,
+      // splitChunks: {
+      //   // include all types of chunks
+      //   chunks: 'all',
+      //   minSize: 1
+      // }
     },
     plugins: [
-      new webpackReal.DefinePlugin({
+      new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       }),
-      new webpackReal.LoaderOptionsPlugin({
-        options: {
-          eslint: {
-            formatter: require('eslint-formatter-pretty')
-          }
-        }
-      }),
-      new webpackReal.NoEmitOnErrorsPlugin()
+      // @ts-ignore
+      new ESLintPlugin({
+        files: 'src/**/*.js',
+        fix: true,
+        formatter: require.resolve('eslint-formatter-pretty'),
+        eslintPath: require.resolve('eslint')
+      })
     ]
   }
 
-  if (isProduction) {
-    webpackConfig.plugins.push(
-      new webpackReal.LoaderOptionsPlugin({
-        minimize: true,
-      })
-    )
-    // webpackConfig.plugins.push(
-
-    //   new BundleAnalyzerPlugin({
-    //     analyzerMode: 'server',
-    //     analyzerPort: 5500,
-    //     openAnalyzer: false
-    //   })
-    // )
-  }
+  // if (isProduction) {
+  //   // webpackConfig.plugins.push(
+  //   //   new BundleAnalyzerPlugin({
+  //   //     analyzerMode: 'server',
+  //   //     analyzerPort: 5500,
+  //   //     openAnalyzer: false
+  //   //   })
+  //   // )
+  // }
 
   return webpackConfig
 }

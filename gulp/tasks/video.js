@@ -1,4 +1,4 @@
-const { src, dest } = require('gulp')
+const {src, dest} = require('gulp')
 const config = require('../config')
 
 function video() {
@@ -6,4 +6,4 @@ function video() {
     .pipe(dest(config.build.video))
 }
 
-module.exports = video 
+module.exports = video

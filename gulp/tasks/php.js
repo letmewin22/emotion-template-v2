@@ -1,5 +1,5 @@
 const config = require('../config')
-const { src, dest } = require('gulp')
+const {src, dest} = require('gulp')
 const inject = require('gulp-inject-string')
 const deleteLines = require('gulp-delete-lines')
 

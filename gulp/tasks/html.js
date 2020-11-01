@@ -2,7 +2,7 @@ const config = require('../config')
 const nunjucksRender = require('gulp-nunjucks-render')
 const prettify = require('gulp-prettify')
 const frontMatter = require('gulp-front-matter')
-const { src, dest } = require('gulp')
+const {src, dest} = require('gulp')
 const webphtml = require('gulp-webp-html')
 const gulpif = require('gulp-if')
 const inject = require('gulp-inject-string')
@@ -19,7 +19,7 @@ function html(bs) {
     .pipe(nunjucksRender({
       path: ['src/templates/'] // String or Array
     }))
-    .pipe(frontMatter({ property: 'data' }))
+    .pipe(frontMatter({property: 'data'}))
     .pipe(nunjucksRender({
       PRODUCTION: config.production,
       path: [config.src.templates]
