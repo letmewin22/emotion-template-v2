@@ -9,6 +9,8 @@ const inject = require('gulp-inject-string')
 
 function html(bs) {
 
+  const replaceCss = 'app.' + config.hash + '.css'
+
   nunjucksRender.nunjucks.configure({
     watch: false,
     trimBlocks: true,
@@ -26,9 +28,7 @@ function html(bs) {
     }))
     .pipe(gulpif(config.production, webphtml()))
     // @ts-ignore
-    .pipe(gulpif(config.production, inject.replace('app.js', 'app.' + config.hash + '.js')))
-    // @ts-ignore
-    .pipe(gulpif(config.production, inject.replace('app.css', 'app.' + config.hash + '.css')))
+    .pipe(gulpif(config.production, inject.replace('app.css', replaceCss)))
     .pipe(prettify({
       indentSize: 2,
       wrapAttributes: 'auto', // 'force'

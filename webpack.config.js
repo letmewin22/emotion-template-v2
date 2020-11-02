@@ -1,6 +1,7 @@
-const ESLintPlugin = require('eslint-webpack-plugin')
 const webpack = require('webpack')
 const path = require('path')
+const gulpConfig = require('./gulp/config')
+const EntrypointsPlugin = require('emotion-webpack-entrypoints-plugin')
 // const BundleAnalyzerPlugin =
 // require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
@@ -8,16 +9,23 @@ const path = require('path')
 function createConfig(env) {
   const isProduction = env === 'production'
 
+  const devName = '[name].js'
+  const buildName = `[name].${gulpConfig.hash}.js`
+
+  const filename = env === 'production' ? buildName : devName
+
   if (env === undefined) {
     env = process.env.NODE_ENV
   }
 
   const webpackConfig = {
-    // entry: {
-    //   // app: ['@babel/polyfill', './src/js/app.js']
-    // }, //If you need support IE11
+    entry: {
+      app: path.resolve(__dirname, 'src/js/app.js')
+    }, // If you need support IE11
     output: {
-      filename: 'app.js'
+      filename,
+      path: path.resolve(__dirname, 'build/js/'),
+      publicPath: './js/'
     },
     resolve: {
       extensions: ['.js'],
@@ -27,6 +35,18 @@ function createConfig(env) {
     },
     module: {
       rules: [
+        {
+          enforce: 'pre',
+          test: /\.js$/,
+          exclude: '/node_modules/',
+          loader: 'eslint-loader',
+          options: {
+            fix: true,
+            cache: true,
+            ignorePattern: __dirname + '/src/js/lib/',
+            formatter: require.resolve('eslint-formatter-pretty')
+          }
+        },
         {
           test: /\.js$/,
           loader: 'babel-loader',
@@ -42,34 +62,31 @@ function createConfig(env) {
         }
       ]
     },
-    mode: !isProduction ? 'development' : 'production',
+    mode: isProduction ? 'development' : 'production',
     devtool: !isProduction ?
       'eval-cheap-module-source-map' :
       false,
     optimization: {
       minimize: isProduction,
-      // splitChunks: {
-      //   // include all types of chunks
-      //   chunks: 'all',
-      //   minSize: 1
-      // }
+      splitChunks: {
+        // include all types of chunks
+        chunks: 'all',
+        minSize: 1,
+      }
     },
     plugins: [
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       }),
-      // @ts-ignore
-      new ESLintPlugin({
-        files: 'src/**/*.js',
-        fix: true,
-        formatter: require.resolve('eslint-formatter-pretty'),
-        eslintPath: require.resolve('eslint')
+      new EntrypointsPlugin({
+        dir: path.resolve(__dirname, 'build/')
       })
     ]
   }
 
   // if (isProduction) {
   //   // webpackConfig.plugins.push(
+
   //   //   new BundleAnalyzerPlugin({
   //   //     analyzerMode: 'server',
   //   //     analyzerPort: 5500,

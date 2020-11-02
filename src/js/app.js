@@ -13,7 +13,6 @@ import {setState, state} from './state'
 import bgWebP from './utils/bgWebP'
 import {resize} from './utils/Resize'
 import {winH} from './utils/winH'
-import SmoothScroll from './components/SmoothScroll/SmoothScroll'
 
 process.env.NODE_ENV === 'production' && cssWebP()
 
@@ -53,7 +52,13 @@ hooks.useLoad(() => {
   // const navbarPos = new NavbarPos()
   // navbarPos.init()
 
-  smoothScroll = new SmoothScroll('#scroll-container')
+  import(
+    /* webpackChunkName: "smooth-scroll" */
+    './components/SmoothScroll/SmoothScroll'
+  ).then((module) => {
+    const SmoothScroll = module.default
+    smoothScroll = new SmoothScroll('#scroll-container')
+  })
 })
 
 
@@ -65,3 +70,4 @@ hooks.useBoth(() => {
     link.href === location.href && link.classList.add('is-active')
   })
 })
+
