@@ -38,12 +38,12 @@ svgSprites()
 
 
 function watchFiles() {
-  gulp.watch([config.watch.html], html)
   gulp.watch([config.watch.css], css)
   gulp.watch([config.watch.js], js)
   gulp.watch([config.watch.img], images)
   gulp.watch([config.watch.video], video)
   gulp.watch([config.watch.audio], audio)
+  gulp.watch([config.watch.html], html)
 }
 
 function clean() {
@@ -58,8 +58,9 @@ function cleanPHP() {
 const build = gulp.series(
   clean,
   wpBuild,
-  gulp.parallel(css, html, images, fonts, video, audio),
-  js
+  gulp.parallel(css, images, fonts, video, audio),
+  js,
+  html
 )
 
 const tophp = gulp.series(
@@ -70,8 +71,9 @@ const tophp = gulp.series(
 
 const dev = gulp.series(
   clean,
-  gulp.parallel(css, html, images, fonts, video, audio),
-  js
+  gulp.parallel(css, images, fonts, video, audio),
+  js,
+  html
 )
 
 const watch = gulp.series(
