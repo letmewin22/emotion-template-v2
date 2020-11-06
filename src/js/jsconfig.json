@@ -4,8 +4,11 @@
     "allowSyntheticDefaultImports": false,
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@core/*": ["./core/*"]
     }
   },
+  "baseUrl": "./",
+  "bracketSpacing": false,
   "exclude": ["node_modules", "build"]
 }

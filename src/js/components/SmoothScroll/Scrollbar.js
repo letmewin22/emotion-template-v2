@@ -1,7 +1,6 @@
 import gsap from 'gsap'
 import mutationObserver from '@/utils/mutationObserver'
 import {setState, state} from '@/state'
-import {run} from './run'
 import {clamp} from '@/utils/math'
 import {resize} from '@/utils/Resize'
 import {raf} from '@/utils/RAF'
@@ -18,7 +17,7 @@ export default class ScrollBar {
 
     this.scrollbar.innerHTML = '<span class="scrollbar__thumb"></span>'
 
-    this.inactiveDelay = 2
+    this.inactiveDelay = 1
     this.timer = 0
     this.elHeight = this.el.getBoundingClientRect().height
     this.max = (this.elHeight - window.innerHeight) * -1
@@ -64,10 +63,10 @@ export default class ScrollBar {
 
       this.thumb.classList.add('scrolling')
       const scrollPos = state.scrolled
-      const percent =(100 * scrollPos) / (this.el.scrollHeight - ch)
+      const percent = 100 * scrollPos / (this.el.scrollHeight - ch)
 
-      this.thumb.style.top = percent + '%'
-      this.thumb.style.transform = `translateY(-${percent}%)`
+      this.thumb.style.top = percent.toFixed(2) + '%'
+      this.thumb.style.transform = `translateY(-${percent.toFixed(2)}%)`
 
       this.active()
     }
@@ -79,34 +78,29 @@ export default class ScrollBar {
       let target
       let o
 
-      setState(state, state.scrolling = true)
+      setState(state, state.scrollbar = true)
+
+      const changePos = (o) => {
+        target = clamp(-this.el.scrollHeight * (o / h), 0, this.max)
+        gsap.to(state, {
+          duration: 0.1,
+          target,
+          ease: 'none',
+          overwrite: 5,
+          onComplete: () => {
+            setState(state, state.scrollbar = false)
+          }
+        })
+      }
 
       if ('ontouchstart' in document.documentElement ||
         (window.DocumentTouch && document instanceof window.DocumentTouch)) {
         const b = e.target.getBoundingClientRect()
         o = e.targetTouches[0].pageY - b.top
-        target = clamp(-this.el.scrollHeight * (o / h), 0, this.max)
-        gsap.to(state, {
-          duration: 0.01,
-          target,
-          ease: 'none',
-          onUpdate: () => {
-            run(this.el, target)
-            state.target = +state.target
-          }
-        })
+        changePos(o)
       } else {
         o = e.clientY
-        target = clamp(-this.el.scrollHeight * (o / h), 0, this.max)
-
-        gsap.to(state, {
-          duration: 0.3,
-          target,
-          ease: 'none',
-          onUpdate: () => {
-            run(this.el, target)
-          }
-        })
+        changePos(o)
       }
     }
 
@@ -126,10 +120,12 @@ export default class ScrollBar {
     })
 
     const mouseUp = () => {
+      setState(state, state.scrollbar = false)
       this.el.parentNode.removeEventListener('mousemove', progressUpdate)
     }
 
     const touchend = () => {
+      setState(state, state.scrollbar = false)
       this.thumb.classList.remove('active')
       this.el.parentNode.removeEventListener('touchmove', progressUpdate, {
         passive: false,

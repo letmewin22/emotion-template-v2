@@ -5,9 +5,9 @@ import moveEl from './libs/moveEl'
 
 import Highway from '@dogstudio/highway'
 
-import {Home, About} from './core/renderers'
-import {Basic} from './core/transitions'
-import Hooks from './core/Hooks'
+import {Home, About} from '@core/renderers'
+import {Basic} from '@core/transitions'
+import Hooks from '@core/Hooks'
 import {setState, state} from './state'
 
 import bgWebP from './utils/bgWebP'

@@ -17,8 +17,8 @@ export default class SmoothScroll {
     this.ease = 0.08
 
     this.opts = {
-      touchMultiplier: 2.4,
-      firefoxMultiplier: 30,
+      touchMultiplier: 3.8,
+      firefoxMultiplier: 40,
       preventTouch: true,
       // passive: false,
       el: document.querySelector('#scroll-container')
@@ -36,11 +36,15 @@ export default class SmoothScroll {
   virtualScroll() {
 
     const vs = new VirtualScroll(this.opts)
+
     vs.on((e) => {
+
       if (!isFixed()) {
+
         if (state.target === undefined) {
           this.targetY += e.deltaY
           setState(state, state.target = e.deltaY)
+
         } else {
           setState(state, state.target += e.deltaY)
           state.target = clamp(state.target, 0, this.max)
@@ -61,19 +65,19 @@ export default class SmoothScroll {
   }
 
   scroll() {
-    if (this.currentY.toFixed(0) !== this.targetY.toFixed(0)) {
+    const s = state.scrollbar
+    const dif = Math.abs(Math.round(this.targetY) - Math.round(this.currentY))
+    if (dif >= 1 || s) {
       setState(state, state.scrolling = true)
-
     } else {
       setState(state, state.scrolling = false)
-
     }
+
     if (state.scrolling) {
       this.targetY = state.target
       this.currentY = lerp(this.currentY, this.targetY, this.ease)
       this.currentY = Math.round(this.currentY*100)/100
       run(this.$el, this.currentY)
-      setState(state, state.scrolling = true)
     }
 
   }
