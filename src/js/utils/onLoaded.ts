@@ -2,9 +2,9 @@ import {raf} from './RAF'
 import {state} from '../state'
 import noop from './noop'
 
-export const onLoaded = (cb = noop) => {
+export const onLoaded = (cb = noop): void => {
 
-  const detectLoading = () => {
+  const detectLoading = (): void => {
     if (state.isLoaded) {
       cb()
       raf.off(detectLoading)

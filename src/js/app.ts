@@ -6,7 +6,7 @@ import moveEl from './libs/moveEl'
 import Highway from '@dogstudio/highway'
 
 import {Home, About} from '@/core/renderers'
-import {Basic} from '@core/transitions'
+import {Basic} from '@/core/transitions'
 import Hooks from '@core/Hooks'
 import {state} from './state'
 

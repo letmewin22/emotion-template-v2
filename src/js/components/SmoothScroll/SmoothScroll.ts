@@ -11,14 +11,14 @@ import {isFixed} from '@/utils/isFixed'
 
 type TOpts = {
   touchMultiplier: number
-    firefoxMultiplier: number,
-    preventTouch: boolean,
-    el: HTMLElement,
+  firefoxMultiplier: number,
+  preventTouch: boolean,
+  el: HTMLElement | null,
 }
 
 export default class SmoothScroll {
 
-  $el: HTMLElement
+  $el: HTMLElement | null
   targetY: number
   currentY: number
   ease: number

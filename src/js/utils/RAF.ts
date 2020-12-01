@@ -1,18 +1,21 @@
+type TFunc = () => void
+
 class RAF {
+  cbArray: Array<null | TFunc>
   constructor() {
     this.cbArray = []
     this.animation()
   }
 
-  on(cb) {
+  on(cb: TFunc): void {
     this.cbArray.push(cb)
   }
 
-  off(cb) {
+  off(cb: TFunc): void {
     this.cbArray = this.cbArray.filter(e => e !== cb)
   }
 
-  animation() {
+  animation(): void {
     this.cbArray.forEach(cb => cb())
     requestAnimationFrame(this.animation.bind(this))
   }
@@ -21,6 +24,6 @@ class RAF {
 const RAFInstance = new RAF()
 
 export const raf = {
-  on: (cb) => RAFInstance.on(cb),
-  off: (cb) => RAFInstance.off(cb),
+  on: (cb: TFunc): void => RAFInstance.on(cb),
+  off: (cb: TFunc): void => RAFInstance.off(cb),
 }

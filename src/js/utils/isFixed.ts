@@ -1,3 +1,3 @@
-export const isFixed = () => {
+export const isFixed = (): boolean => {
   return document.body.classList.contains('e-fixed')
 }

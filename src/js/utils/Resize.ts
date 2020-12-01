@@ -1,4 +1,8 @@
+type TFunc = () => void
+
 class Resize {
+  cbArray: Array<null | TFunc>
+  debounced: TFunc
   constructor() {
     this.cbArray = []
     this.init()
@@ -20,16 +24,16 @@ class Resize {
     this.cbArray.forEach((cb) => cb())
   }
 
-  on(cb) {
+  on(cb: TFunc): void {
     cb()
     this.cbArray.push(cb)
   }
 
-  off(cb) {
+  off(cb: TFunc): void {
     this.cbArray = this.cbArray.filter(e => e !== cb)
   }
 
-  debounce(func, wait = 100) {
+  debounce(func: TFunc, wait = 100): TFunc {
     let timeout
     return function(...args) {
       clearTimeout(timeout)
@@ -47,6 +51,6 @@ class Resize {
 const resizeInstance = new Resize()
 
 export const resize = {
-  on: (cb) => resizeInstance.on(cb),
-  off: (cb) => resizeInstance.off(cb)
+  on: (cb: TFunc): void => resizeInstance.on(cb),
+  off: (cb: TFunc): void => resizeInstance.off(cb)
 }

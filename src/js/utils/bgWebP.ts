@@ -1,4 +1,4 @@
-const bgWebP = () => {
+const bgWebP = (): void => {
   const items = document.querySelectorAll('[data-bg]')
 
   items.forEach(el => {

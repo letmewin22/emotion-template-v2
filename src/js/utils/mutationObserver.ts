@@ -1,4 +1,9 @@
-const mutationObserver = (target, outsideCallback) => {
+type TFunc = {
+  t: HTMLElement,
+  cb: () => void
+}
+
+const mutationObserver = (target: TFunc['t'], outsideCallback: TFunc['cb']): void => {
 
   const config = {
     childList: true
