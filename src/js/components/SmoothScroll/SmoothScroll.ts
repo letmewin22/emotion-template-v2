@@ -1,16 +1,32 @@
 import VirtualScroll from 'virtual-scroll'
 
-import {setState, state} from '@/state'
+import {state} from '@/state'
 import {clamp, lerp} from '@/utils/math'
-import ScrollBar from './Scrollbar'
+import ScrollBar from './Scrollbar/ScrollBar'
 import {run} from './run'
 import {resize} from '@/utils/Resize'
 import mutationObserver from '@/utils/mutationObserver'
 import {raf} from '@/utils/RAF'
 import {isFixed} from '@/utils/isFixed'
 
+type TOpts = {
+  touchMultiplier: number
+    firefoxMultiplier: number,
+    preventTouch: boolean,
+    el: HTMLElement,
+}
+
 export default class SmoothScroll {
-  constructor($el) {
+
+  $el: HTMLElement
+  targetY: number
+  currentY: number
+  ease: number
+  opts: TOpts
+  height: number
+  max: number
+
+  constructor($el: string) {
     this.$el = document.querySelector($el)
     this.targetY = 0
     this.currentY = 0
@@ -20,33 +36,28 @@ export default class SmoothScroll {
       touchMultiplier: 3.8,
       firefoxMultiplier: 40,
       preventTouch: true,
-      // passive: false,
-      el: document.querySelector('#scroll-container')
+      el: document.querySelector('#scroll-container'),
     }
 
     this.init()
   }
 
-  bind() {
-    ['scroll', 'resize'].forEach(fn => {
+  bind(): void {
+    ['scroll', 'resize'].forEach((fn) => {
       this[fn] = this[fn].bind(this)
     })
   }
 
-  virtualScroll() {
-
+  virtualScroll(): void {
     const vs = new VirtualScroll(this.opts)
 
-    vs.on((e) => {
-
+    vs.on((e: any) => {
       if (!isFixed()) {
-
         if (state.target === undefined) {
           this.targetY += e.deltaY
-          setState(state, state.target = e.deltaY)
-
+          state.target = e.deltaY
         } else {
-          setState(state, state.target += e.deltaY)
+          state.target += e.deltaY
           state.target = clamp(state.target, 0, this.max)
           this.targetY = state.target
         }
@@ -54,7 +65,7 @@ export default class SmoothScroll {
     })
   }
 
-  init() {
+  init(): void {
     this.virtualScroll()
     this.bind()
     resize.on(this.resize)
@@ -64,36 +75,34 @@ export default class SmoothScroll {
     raf.on(this.scroll)
   }
 
-  scroll() {
+  scroll(): void {
     const s = state.scrollbar
     const dif = Math.abs(Math.round(this.targetY) - Math.round(this.currentY))
     if (dif >= 1 || s) {
-      setState(state, state.scrolling = true)
+      state.scrolling = true
     } else {
-      setState(state, state.scrolling = false)
+      state.scrolling = false
     }
 
     if (state.scrolling) {
       this.targetY = state.target
       this.currentY = lerp(this.currentY, this.targetY, this.ease)
-      this.currentY = Math.round(this.currentY*100)/100
+      this.currentY = Math.round(this.currentY * 100) / 100
       run(this.$el, this.currentY)
     }
-
   }
 
-  resize() {
+  resize(): void {
     this.height = this.$el.getBoundingClientRect().height
     this.max = (this.height - window.innerHeight) * -1
   }
 
-  reset() {
-    setState(state, state.target = 0)
+  reset(): void {
+    state.target = 0
     this.targetY = 0
     this.currentY = 0
     run(this.$el, 0)
   }
 
-  destroy() {}
+  // destroy(): void {}
 }
-

@@ -1,9 +1,13 @@
 {
-  "parser": "babel-eslint",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "tsconfigRootDir": "./src/js/"
+  },
   "env": {
     "browser": true,
     "node": true,
-    "es6": true
+    "es6": true,
+    "es2020": true
   },
   "rules": {
     "no-undef": 1,
@@ -13,38 +17,70 @@
     "no-new-wrappers": 0,
     "operator-linebreak": "off",
     "no-unused-vars": 1,
-    "eqeqeq": [2, "smart"],
+    "eqeqeq": [
+      2,
+      "smart"
+    ],
     "no-floating-decimal": 2,
-    "no-multi-spaces": [2, {
-      "exceptions": {
-        "ImportDeclaration": true,
-        "VariableDeclarator": true
+    "no-multi-spaces": [
+      2,
+      {
+        "exceptions": {
+          "ImportDeclaration": true,
+          "VariableDeclarator": true
+        }
       }
-    }],
+    ],
     "no-multi-str": 2,
     "camelcase": 1,
-    "indent": [2, 2, {
-      "SwitchCase": 1,
-      "VariableDeclarator": 1
-    }],
-    "quotes": [2, "single", "avoid-escape"],
-    "semi": [2, "never"],
+    "indent": [
+      2,
+      2,
+      {
+        "SwitchCase": 1,
+        "VariableDeclarator": 1
+      }
+    ],
+    "quotes": [
+      2,
+      "single",
+      "avoid-escape"
+    ],
+    "semi": [
+      2,
+      "never"
+    ],
     "space-before-blocks": 2,
-    "space-before-function-paren": [2, "never"],
+    "space-before-function-paren": [
+      2,
+      "never"
+    ],
     "constructor-super": 2,
     "arrow-spacing": 2,
     "arrow-parens": "off",
     "comma-dangle": "off",
     "require-jsdoc": "off",
     "no-extend-native": "off",
-    "max-len": ["error", { 
-      "ignoreComments": true, 
-      "ignoreUrls": true, 
-      "ignoreStrings": true, 
-      "ignoreRegExpLiterals": true,
-      "ignoreTemplateLiterals": true
-    }]
+    "no-empty-function": 0,
+    "no-explicit-any": 0,
+    "max-len": [
+      "error",
+      {
+        "ignoreComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreRegExpLiterals": true,
+        "ignoreTemplateLiterals": true
+      }
+    ]
   },
-
-  "extends": ["eslint:recommended", "google"]
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "google"
+  ]
 }

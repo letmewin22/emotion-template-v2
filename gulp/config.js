@@ -7,7 +7,6 @@ const sourceFolder = foldersName.sourceFolder
 const production = util.env.production || util.env.prod || false
 
 const config = {
-
   env: 'development',
   production: production,
   templates: sourceFolder + '/templates',
@@ -24,10 +23,14 @@ const config = {
   },
   src: {
     templates: 'src/templates',
-    html: [sourceFolder + '/*.html', '!' + sourceFolder + '/_*.html', '!' + sourceFolder + '/data'],
+    html: [
+      sourceFolder + '/*.html',
+      '!' + sourceFolder + '/_*.html',
+      '!' + sourceFolder + '/data',
+    ],
     php: projectFolder + '/**/*.php',
     css: sourceFolder + '/scss/app.scss',
-    js: sourceFolder + '/js/app.js',
+    js: sourceFolder + '/js/app.{js,ts}',
     img: sourceFolder + '/img/**/*.{jpg,png,svg,gif,ico,webp}',
     video: sourceFolder + '/video/**/*',
     audio: sourceFolder + '/audio/**/*',
@@ -36,26 +39,26 @@ const config = {
   watch: {
     html: sourceFolder + '/**/*.html',
     css: sourceFolder + '/scss/**/*.{scss,sass}',
-    js: sourceFolder + '/js/**/*.{js,glsl,json}',
+    js: sourceFolder + '/js/**/*.{js,glsl,json,ts}',
     img: sourceFolder + '/img/**/*.{jpg,png,svg,gif,ico,webp}',
     video: sourceFolder + '/video/**/*',
-    audio: sourceFolder + '/audio/**/*'
+    audio: sourceFolder + '/audio/**/*',
   },
   clean: './' + projectFolder + '/',
   cleanJS: projectFolder + '/js/app.*',
   cleanCSS: projectFolder + '/css',
 
-  setEnv: function(env) {
+  setEnv: function (env) {
     if (typeof env !== 'string') return
     this.env = env
     this.production = env === 'production'
     process.env.NODE_ENV = env
   },
 
-  logEnv: function() {
+  logEnv: function () {
     util.log(
       'Environment:',
-      util.colors.white.bgMagenta(' ' + process.env.NODE_ENV + ' ')
+      util.colors.white.bgMagenta(' ' + process.env.NODE_ENV + ' '),
     )
   },
 

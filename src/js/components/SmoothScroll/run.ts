@@ -1,6 +1,6 @@
-import {setState, state} from '@/state'
+import {state} from '@/state'
 
-export const run = (el, pos) => {
+export const run = (el: HTMLElement, pos: number): void => {
   const t = `matrix3d(1, 0, 0, 0, 
       0, 1, 0, 0,
       0, 0, 1, 0, 
@@ -8,5 +8,5 @@ export const run = (el, pos) => {
 
   el.style.transform = t
   el.style.willChange = 'transform'
-  setState(state, (state.scrolled = -pos))
+  state.scrolled = -pos
 }

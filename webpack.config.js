@@ -5,7 +5,6 @@ const EntrypointsPlugin = require('emotion-webpack-entrypoints-plugin')
 // const BundleAnalyzerPlugin =
 // require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-
 function createConfig(env) {
   const isProduction = env === 'production'
 
@@ -20,69 +19,68 @@ function createConfig(env) {
 
   const webpackConfig = {
     entry: {
-      app: path.resolve(__dirname, 'src/js/app.js')
+      app: path.resolve(__dirname, 'src/js/app.ts'),
     }, // If you need support IE11
     output: {
       filename,
       path: path.resolve(__dirname, 'build/js/'),
-      publicPath: './js/'
+      publicPath: './js/',
     },
     resolve: {
-      extensions: ['.js'],
+      extensions: ['.js', '.ts'],
       alias: {
         '@': path.resolve(__dirname, 'src/js'),
-        '@core': path.resolve(__dirname, 'src/js/core')
-      }
+        '@core': path.resolve(__dirname, 'src/js/core'),
+      },
     },
     module: {
       rules: [
         {
           enforce: 'pre',
-          test: /\.js$/,
+          test: /\.(js|jsx|tsx|ts)$/,
           exclude: '/node_modules/',
           loader: 'eslint-loader',
           options: {
             fix: true,
             cache: true,
             ignorePattern: __dirname + '/src/js/lib/',
-            formatter: require.resolve('eslint-formatter-pretty')
-          }
+            formatter: require.resolve('eslint-formatter-pretty'),
+          },
         },
         {
-          test: /\.js$/,
+          test: /\.(js|jsx|tsx|ts)$/,
           loader: 'babel-loader',
           exclude: '/node_modules/',
           options: {
-            cacheDirectory: true
-          }
+            cacheDirectory: true,
+          },
         },
         {
           test: /\.glsl$/,
           exclude: '/node_modules/',
-          loader: 'webpack-glsl-loader'
-        }
-      ]
+          loader: 'webpack-glsl-loader',
+        },
+      ],
     },
     mode: isProduction ? 'development' : 'production',
-    devtool: !isProduction ?
-      'eval-cheap-module-source-map' :
-      false,
+    devtool: !isProduction ? 'eval-cheap-module-source-map' : false,
     optimization: {
       minimize: isProduction,
       splitChunks: {
         // include all types of chunks
         chunks: 'all',
         minSize: 1,
-      }
+      },
     },
     plugins: [
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       }),
       new EntrypointsPlugin({
-        dir: path.resolve(__dirname, 'src/templates/layouts')
-      })
-    ]
+        dir: path.resolve(__dirname, 'src/templates/layouts'),
+        path: './js',
+      }),
+    ],
   }
 
   // if (isProduction) {

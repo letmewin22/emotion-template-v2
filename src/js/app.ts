@@ -5,10 +5,10 @@ import moveEl from './libs/moveEl'
 
 import Highway from '@dogstudio/highway'
 
-import {Home, About} from '@core/renderers'
+import {Home, About} from '@/core/renderers'
 import {Basic} from '@core/transitions'
 import Hooks from '@core/Hooks'
-import {setState, state} from './state'
+import {state} from './state'
 
 import bgWebP from './utils/bgWebP'
 import {resize} from './utils/Resize'
@@ -16,24 +16,24 @@ import {winH} from './utils/winH'
 
 process.env.NODE_ENV === 'production' && cssWebP()
 
-const H = new Highway.Core({
+const H: any = new Highway.Core({
   renderers: {
     home: Home,
-    about: About
+    about: About,
   },
   transitions: {
-    default: Basic
-  }
+    default: Basic,
+  },
 })
 
 const hooks = new Hooks(H)
 
 hooks.useNavigateOut(() => {
-  setState(state, state.isLoaded = false)
+  state.isLoaded = false
 })
 
 hooks.useNavigateEnd(() => {
-  setState(state, state.isLoaded = true)
+  state.isLoaded = true
 })
 
 let smoothScroll
@@ -46,13 +46,12 @@ hooks.useBothStart(() => {
 })
 
 hooks.useLoad(() => {
-
   resize.on(winH)
 
   // const navbarPos = new NavbarPos()
   // navbarPos.init()
 
-  import(
+  void import(
     /* webpackChunkName: "smooth-scroll" */
     './components/SmoothScroll/SmoothScroll'
   ).then((module) => {
@@ -61,13 +60,11 @@ hooks.useLoad(() => {
   })
 })
 
-
 const links = document.querySelectorAll('nav a')
 
 hooks.useBoth(() => {
-  links.forEach(link => {
+  links.forEach((link: HTMLLinkElement) => {
     link.classList.remove('is-active')
     link.href === location.href && link.classList.add('is-active')
   })
 })
-

@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "outDir": "./",
+    "target": "ES5",
+    "lib": ["DOM","DOM.Iterable","ES2015","ES2020"],
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "module": "ES2020",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "types": ["node"],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@core/*": [
+        "./core/*"
+      ]
+    }
+  },
+  "baseUrl": "/src/js",
+  "bracketSpacing": false,
+  "include": [
+    "./**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "webpack.cofing.js"
+  ]
+}
