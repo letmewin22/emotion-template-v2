@@ -8,20 +8,18 @@ import {IScrollBar} from './IScrollbar'
 
 export default class ScrollBar implements IScrollBar {
 
-  el: HTMLElement
   scrollbar: HTMLElement
-  inactiveDelay: number
-  timer: number
-  elHeight: number
-  max: number
-  thumb: HTMLElement
-  height: number
+  private inactiveDelay: number
+  private timer: number
+  private elHeight: number
+  private max: number
+  private thumb: HTMLElement
+  private height: number
   timerTicker: any
   interval: any
-  active: () => void
-  reset: () => void
+  private active: () => void
 
-  constructor(el?: HTMLElement) {
+  constructor(readonly el?: HTMLElement) {
     this.el = el || document.getElementById('scroll-container')
 
     this.scrollbar = document.createElement('div')

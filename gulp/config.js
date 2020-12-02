@@ -26,7 +26,7 @@ const config = {
     html: [
       sourceFolder + '/*.html',
       '!' + sourceFolder + '/_*.html',
-      '!' + sourceFolder + '/data',
+      '!' + sourceFolder + '/data/data.html',
     ],
     php: projectFolder + '/**/*.php',
     css: sourceFolder + '/scss/app.scss',

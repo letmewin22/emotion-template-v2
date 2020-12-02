@@ -63,8 +63,8 @@
     "comma-dangle": "off",
     "require-jsdoc": "off",
     "no-extend-native": "off",
-    "no-empty-function": 0,
-    "no-explicit-any": 0,
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "max-len": [
       "error",
       {
@@ -81,6 +81,7 @@
   ],
   "extends": [
     "eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
     "google"
   ]
 }

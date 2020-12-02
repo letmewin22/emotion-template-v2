@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./",
+    "outDir": "/src/js",
     "target": "ES5",
     "lib": ["DOM","DOM.Iterable","ES2015","ES2020", "ScriptHost"],
     "noImplicitAny": false,
@@ -20,7 +20,7 @@
     "typeRoots": [
       "node_modules/@types"
     ],
-    "baseUrl": "./",
+    "baseUrl": "src/js",
     "paths": {
       "@/*": [
         "./*"
@@ -39,9 +39,8 @@
     "node_modules",
     "**/*.d.ts",
     "build",
-    "/build/",
-    "/build",
     "webpack.cofing.js",
-    "./libs/*"
+    "./libs/*",
+    "gulp"
   ]
 }
