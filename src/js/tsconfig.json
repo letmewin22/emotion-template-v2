@@ -15,8 +15,11 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true, 
     "types": ["node"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "baseUrl": "./",
     "paths": {
       "@/*": [
@@ -34,7 +37,10 @@
   ],
   "exclude": [
     "node_modules",
+    "**/*.d.ts",
     "build",
+    "/build/",
+    "/build",
     "webpack.cofing.js",
     "./libs/*"
   ]

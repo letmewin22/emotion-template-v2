@@ -5,5 +5,3 @@
   } else if (window.console) {
     window.console.log('Made by emotiON: https://emotion-agency.com')
   }
-
-

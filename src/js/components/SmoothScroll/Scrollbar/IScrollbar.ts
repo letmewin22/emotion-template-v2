@@ -7,7 +7,7 @@ export interface IScrollBar {
   max: number
   thumb: HTMLElement
   height: number
-  timerTicker: NodeJS.Timeout
-  interval: NodeJS.Timeout
+  timerTicker: any
+  interval: any
   reset: () => void
 }

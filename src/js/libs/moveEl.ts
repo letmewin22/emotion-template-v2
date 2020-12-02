@@ -96,7 +96,7 @@ export default function moveEl() {
     return children.indexOf(el)
   }
   //Функция получения массива индексов элементов внутри родителя 
-  function indexOfElements(parent, back) {
+  function indexOfElements(parent, back?) {
     const children = parent.children
     const childrenArray = []
     for (let i = 0; i < children.length; i++) {

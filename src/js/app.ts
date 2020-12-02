@@ -16,7 +16,7 @@ import {winH} from './utils/winH'
 
 process.env.NODE_ENV === 'production' && cssWebP()
 
-const H: any = new Highway.Core({
+const H: typeof Highway = new Highway.Core({
   renderers: {
     home: Home,
     about: About,

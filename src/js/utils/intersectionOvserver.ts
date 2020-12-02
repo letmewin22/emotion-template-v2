@@ -1,7 +1,14 @@
 import noop from './noop'
 import {raf} from './RAF'
 
-export const intersectionOvserver = (el, cb) => {
+type TIO = {
+  on: () => void
+  off: () => void
+}
+
+type TFunc = () => void
+
+export const intersectionOvserver = (el: HTMLElement, cb: TFunc): TIO => {
 
   cb = cb ?? noop
   const b = el.getBoundingClientRect()

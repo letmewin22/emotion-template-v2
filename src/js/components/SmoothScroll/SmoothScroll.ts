@@ -51,7 +51,7 @@ export default class SmoothScroll {
   virtualScroll(): void {
     const vs = new VirtualScroll(this.opts)
 
-    vs.on((e: any) => {
+    vs.on((e: Event) => {
       if (!isFixed()) {
         if (state.target === undefined) {
           this.targetY += e.deltaY

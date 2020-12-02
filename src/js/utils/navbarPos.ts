@@ -3,8 +3,11 @@ import {isFixed} from './isFixed'
 import {raf} from './RAF'
 
 export default class NavbarPos {
+  mouseFunc: (e: any) => any
+  scrollPos: number
+
   constructor() {
-    this.mouseFunc = (e) => {
+    this.mouseFunc = (e: any) => {
       this.mouseHandler(e)
     }
   }
@@ -14,7 +17,7 @@ export default class NavbarPos {
     raf.on(this.scrollNav.bind(this))
   }
 
-  mouseHandler(e) {
+  mouseHandler(e: any) {
     if (e.screenY <= document.querySelector('.navbar').scrollHeight + 100) {
       document.body.classList.remove('nav-hidden')
     } else document.body.classList.add('nav-hidden')

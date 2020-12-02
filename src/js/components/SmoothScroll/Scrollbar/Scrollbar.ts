@@ -16,8 +16,8 @@ export default class ScrollBar implements IScrollBar {
   max: number
   thumb: HTMLElement
   height: number
-  timerTicker: NodeJS.Timeout
-  interval: NodeJS.Timeout
+  timerTicker: any
+  interval: any
   active: () => void
   reset: () => void
 

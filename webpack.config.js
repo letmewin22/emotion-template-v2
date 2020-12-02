@@ -43,7 +43,7 @@ function createConfig(env) {
           options: {
             fix: true,
             cache: true,
-            ignorePattern: __dirname + '/src/js/lib/',
+            ignorePattern: __dirname + '/src/js/libs/',
             formatter: require.resolve('eslint-formatter-pretty'),
           },
         },
@@ -64,6 +64,9 @@ function createConfig(env) {
     },
     mode: isProduction ? 'development' : 'production',
     devtool: !isProduction ? 'eval-cheap-module-source-map' : false,
+    performance: {
+      hints: process.env.NODE_ENV === 'production' ? 'warning' : false,
+    },
     optimization: {
       minimize: isProduction,
       splitChunks: {
