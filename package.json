@@ -1,6 +1,6 @@
 {
   "name": "emotion-template",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Base emotion agency template with typescript",
   "main": "index.html",
   "scripts": {
@@ -20,6 +20,7 @@
   "devDependencies": {
     "@babel/core": "^7.10.2",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-decorators": "^7.12.1",
     "@babel/plugin-proposal-private-methods": "^7.10.4",
     "@babel/plugin-transform-runtime": "^7.10.4",
     "@babel/preset-env": "^7.10.2",

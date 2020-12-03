@@ -19,7 +19,7 @@ export default class ScrollBar implements IScrollBar {
   interval: any
   private active: () => void
 
-  constructor(readonly el?: HTMLElement) {
+  constructor(readonly el?: HTMLElement | null) {
     this.el = el || document.getElementById('scroll-container')
 
     this.scrollbar = document.createElement('div')
@@ -31,7 +31,7 @@ export default class ScrollBar implements IScrollBar {
 
     this.inactiveDelay = 1
     this.timer = 0
-    this.elHeight = this.el.getBoundingClientRect().height
+    this.el && (this.elHeight = this.el.getBoundingClientRect().height)
     this.max = (this.elHeight - window.innerHeight) * -1
 
     this.active = () => {

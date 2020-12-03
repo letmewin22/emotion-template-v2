@@ -1,5 +1,5 @@
 export interface IScrollBar {
-  readonly el?: HTMLElement
+  readonly el?: HTMLElement | null
   init: () => void
   setHeight: () => void
   scroll: () => void

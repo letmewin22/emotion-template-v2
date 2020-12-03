@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "/src/js",
     "target": "ES5",
-    "lib": ["DOM","DOM.Iterable","ES2015","ES2020", "ScriptHost"],
+    "lib": ["DOM","DOM.Iterable","ES2015", "ESNext", "ScriptHost"],
     "noImplicitAny": false,
     // "strictNullChecks": true,
     "noUnusedLocals": true, 
